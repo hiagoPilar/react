@@ -29,6 +29,14 @@ function Home() {
     });
   }
 
+  //funcoa para deletar users
+  async function deleteUsers(id) {
+    await api.delete(`/users/${id}`);
+    //precisamos chamar ela no button
+
+    getUsers(); //atualiza apos deletar
+  }
+
   //toda vez que a pagina abrir ele vai chamar o getUsers
   useEffect(() => {
     getUsers();
@@ -53,7 +61,8 @@ function Home() {
             <p>Email:{user.email}</p>
             <p>Idade: {user.age}</p>
           </div>
-          <button>Apagar</button>
+          {/* se precisa mandar parametro, sempre colocar () => antes da funcao*/}
+          <button onClick={() => deleteUsers(user.id)}>Apagar</button>
         </div>
       ))}
     </div>
